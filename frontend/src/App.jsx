@@ -4,7 +4,7 @@ import MonthInput from "./components/MonthInput";
 import { Input, Label, Select, Textarea } from "./globalTheme";
 
 const Container = styled.div`
-  max-width: 1024px;
+  max-width: 640px;
   margin: 0 auto;
   padding: 40px 32px;
 `;
