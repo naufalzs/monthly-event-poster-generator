@@ -1,0 +1,29 @@
+:root {
+  --color-primary: #f37879;
+  --color-secondary: #91b4ec;
+  --color-gray: #f3f3f3;
+  --color-red: #f43f5e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Archivo", sans-serif;
+}
+
+a,
+button {
+  font-family: inherit;
+}
