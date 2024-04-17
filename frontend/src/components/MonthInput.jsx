@@ -4,33 +4,10 @@ import { addDays, format } from "date-fns";
 import styled from "styled-components";
 
 import "react-datepicker/dist/react-datepicker.css";
-
-const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--color-secondary);
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 40px;
-  border-radius: 30px;
-  background-color: var(--color-gray);
-
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 14px;
-  color: var(--color-primary);
-
-  outline: none;
-  border: none;
-`;
+import { Input, Label } from "../globalTheme";
+import { useField, useFormikContext } from "formik";
 
 const InputWrapper = styled.div`
-  margin-top: 4px;
   position: relative;
 
   .react-datepicker {
@@ -39,28 +16,27 @@ const InputWrapper = styled.div`
   }
 `;
 
-const MonthInput = () => {
+const MonthInput = (props) => {
+  const { setFieldValue } = useFormikContext();
+  const [field] = useField(props);
   const [selectedMonth, setSelectedMonth] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
 
   const handleChange = (e) => {
-    setIsOpen(!isOpen);
     setSelectedMonth(e);
+    setFieldValue("month", format(e, "MMMM"));
   };
+
   const handleClick = (e) => {
     e.preventDefault();
     setIsOpen(!isOpen);
   };
+
   return (
     <Label>
       Month
       <InputWrapper>
-        <Input
-          name="month"
-          value={format(selectedMonth, "MMMM")}
-          onClick={handleClick}
-          readOnly
-        />
+        <Input {...field} onClick={handleClick} readOnly />
         {isOpen && (
           <DatePicker
             selected={selectedMonth}
