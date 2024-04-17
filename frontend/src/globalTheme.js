@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Label = styled.label`
   display: flex;
@@ -9,11 +9,10 @@ export const Label = styled.label`
   color: var(--color-secondary);
 `;
 
-export const Input = styled.input`
+const inputStyle = css`
   margin-top: 4px;
 
   width: 100%;
-  height: 40px;
   border-radius: 30px;
   background-color: var(--color-gray);
 
@@ -24,4 +23,19 @@ export const Input = styled.input`
 
   outline: none;
   border: none;
+`;
+
+export const Input = styled.input`
+  ${inputStyle}
+  height: 40px;
+`;
+
+export const Textarea = styled.textarea`
+  ${inputStyle}
+`;
+
+export const Select = styled.select`
+  ${inputStyle}
+  height: 40px;
+  appearance: none;
 `;
