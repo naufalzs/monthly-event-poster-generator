@@ -2,6 +2,8 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { addDays, format } from "date-fns";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Input, Label } from "../globalTheme";
@@ -13,6 +15,13 @@ const InputWrapper = styled.div`
   .react-datepicker {
     position: absolute;
     right: 0;
+  }
+
+  svg {
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 14px;
+    cursor: pointer;
   }
 `;
 
@@ -37,6 +46,7 @@ const MonthInput = (props) => {
       Month
       <InputWrapper>
         <Input {...field} onClick={handleClick} readOnly />
+        <FontAwesomeIcon icon={faCalendarDays} size="lg" />
         {isOpen && (
           <DatePicker
             selected={selectedMonth}
