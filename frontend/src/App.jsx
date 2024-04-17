@@ -1,7 +1,16 @@
 import styled from "styled-components";
 import { Formik } from "formik";
 import MonthInput from "./components/MonthInput";
-import { Input, Label, Select, Textarea } from "./globalTheme";
+import {
+  BtnOutlined,
+  BtnPrimary,
+  Input,
+  Label,
+  Select,
+  Textarea,
+} from "./globalTheme";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   max-width: 640px;
@@ -46,7 +55,18 @@ const Title2 = styled.h2`
 `;
 
 const LowerForm = styled.div`
-  margin-top: 12px;
+  margin-top: 16px;
+`;
+
+const Hr = styled.hr`
+  border: 2px dashed var(--color-secondary);
+  margin: 20px 0;
+`;
+
+const BtnGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `;
 
 const App = () => {
@@ -107,6 +127,14 @@ const App = () => {
                   />
                 </Label>
               </LowerForm>
+              <Hr />
+              <BtnGroup>
+                <BtnOutlined>
+                  <div>New Event</div>
+                  <FontAwesomeIcon icon={faPlus} size="sm" />
+                </BtnOutlined>
+                <BtnPrimary>Submit</BtnPrimary>
+              </BtnGroup>
             </div>
           </Form>
         )}
