@@ -10,7 +10,7 @@ import {
   Textarea,
 } from "./globalTheme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   max-width: 640px;
@@ -44,6 +44,13 @@ const UpperForm = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+`;
+
+const TrashIconWrapper = styled.div`
+  position: absolute;
+  right: 0;
+  color: var(--color-red);
+  cursor: pointer;
 `;
 
 const Title2 = styled.h2`
@@ -119,8 +126,11 @@ const App = () => {
               <LowerForm>
                 <Label>
                   Event Description
+                  <TrashIconWrapper>
+                    <FontAwesomeIcon icon={faTrashCan} />
+                  </TrashIconWrapper>
                   <Textarea
-                    rows={2}
+                    rows={3}
                     name="desc"
                     value={values.desc}
                     onChange={handleChange}
