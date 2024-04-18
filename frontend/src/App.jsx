@@ -1,16 +1,11 @@
 import styled from "styled-components";
 import { Formik } from "formik";
 import MonthInput from "./components/MonthInput";
-import {
-  BtnOutlined,
-  BtnPrimary,
-  Input,
-  Label,
-  Select,
-  Textarea,
-} from "./globalTheme";
+import { BtnOutlined, BtnPrimary, Input, Label } from "./globalTheme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import EventInput from "./components/EventInput";
+import { useRef } from "react";
 
 const Container = styled.div`
   max-width: 640px;
@@ -46,28 +41,12 @@ const UpperForm = styled.div`
   gap: 16px;
 `;
 
-const TrashIconWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  color: var(--color-red);
-  cursor: pointer;
-`;
-
 const Title2 = styled.h2`
   font-family: "Montserrat", sans-serif;
   margin: 24px 0 16px;
   font-size: 28px;
   font-weight: 600;
   color: var(--color-primary);
-`;
-
-const LowerForm = styled.div`
-  margin-top: 16px;
-`;
-
-const Hr = styled.hr`
-  border: 2px dashed var(--color-secondary);
-  margin: 20px 0;
 `;
 
 const BtnGroup = styled.div`
@@ -77,6 +56,17 @@ const BtnGroup = styled.div`
 `;
 
 const App = () => {
+  const eventHelper = useRef(null);
+
+  const handleAddEvent = (e) => {
+    e.preventDefault();
+    eventHelper.current.push({
+      name: "",
+      date: "",
+      desc: "",
+    });
+  };
+
   return (
     <Container>
       <Title>
@@ -87,9 +77,13 @@ const App = () => {
         initialValues={{
           companyName: "",
           month: "",
-          name: "",
-          date: "",
-          desc: "",
+          events: [
+            {
+              name: "",
+              date: "",
+              desc: "",
+            },
+          ],
         }}
         validate={(values) => {
           console.log(values);
@@ -106,40 +100,13 @@ const App = () => {
             </UpperForm>
             <div>
               <Title2>Event Programme</Title2>
-              <UpperForm>
-                <Label>
-                  Event Name
-                  <Input name="name" onChange={handleChange} />
-                </Label>
-                <Label>
-                  Event Date
-                  <Select name="date" onChange={handleChange}>
-                    <option value="">--Please choose an option--</option>
-                    {[...Array(31)].map((_, index) => (
-                      <option key={index} value={index + 1}>
-                        {index + 1}
-                      </option>
-                    ))}
-                  </Select>
-                </Label>
-              </UpperForm>
-              <LowerForm>
-                <Label>
-                  Event Description
-                  <TrashIconWrapper>
-                    <FontAwesomeIcon icon={faTrashCan} />
-                  </TrashIconWrapper>
-                  <Textarea
-                    rows={3}
-                    name="desc"
-                    value={values.desc}
-                    onChange={handleChange}
-                  />
-                </Label>
-              </LowerForm>
-              <Hr />
+              <EventInput
+                values={values}
+                handleChange={handleChange}
+                ref={eventHelper}
+              />
               <BtnGroup>
-                <BtnOutlined>
+                <BtnOutlined onClick={handleAddEvent}>
                   <div>New Event</div>
                   <FontAwesomeIcon icon={faPlus} size="sm" />
                 </BtnOutlined>
