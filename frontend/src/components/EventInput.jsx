@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Input, Label, Select, Textarea } from "../globalTheme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
 
 const UpperForm = styled.div`
   display: grid;
@@ -28,6 +29,14 @@ const Hr = styled.hr`
 `;
 
 const EventInput = forwardRef(({ values, handleChange }, ref) => {
+  const handleDeleteEvent = () => {
+    if (values.events.length === 1) {
+      toast.error("Oops you need at least one event");
+      return;
+    }
+    ref.current.pop();
+  };
+
   return (
     <FieldArray
       name="events"
@@ -56,7 +65,7 @@ const EventInput = forwardRef(({ values, handleChange }, ref) => {
             <LowerForm>
               <Label>
                 Event Description
-                <TrashIconWrapper onClick={()=>arrayHelpers.pop()}>
+                <TrashIconWrapper onClick={handleDeleteEvent}>
                   <FontAwesomeIcon icon={faTrashCan} />
                 </TrashIconWrapper>
                 <Textarea

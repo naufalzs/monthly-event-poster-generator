@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import EventInput from "./components/EventInput";
 import { useRef } from "react";
+import { Toaster } from "react-hot-toast";
 
 const Container = styled.div`
   max-width: 640px;
@@ -68,55 +69,58 @@ const App = () => {
   };
 
   return (
-    <Container>
-      <Title>
-        monthly <br />
-        <span>event form</span>
-      </Title>
-      <Formik
-        initialValues={{
-          companyName: "",
-          month: "",
-          events: [
-            {
-              name: "",
-              date: "",
-              desc: "",
-            },
-          ],
-        }}
-        validate={(values) => {
-          console.log(values);
-        }}
-      >
-        {({ values, handleChange }) => (
-          <Form>
-            <UpperForm>
-              <Label>
-                Company Name
-                <Input name="companyName" onChange={handleChange} />
-              </Label>
-              <MonthInput name="month" />
-            </UpperForm>
-            <div>
-              <Title2>Event Programme</Title2>
-              <EventInput
-                values={values}
-                handleChange={handleChange}
-                ref={eventHelper}
-              />
-              <BtnGroup>
-                <BtnOutlined onClick={handleAddEvent}>
-                  <div>New Event</div>
-                  <FontAwesomeIcon icon={faPlus} size="sm" />
-                </BtnOutlined>
-                <BtnPrimary>Submit</BtnPrimary>
-              </BtnGroup>
-            </div>
-          </Form>
-        )}
-      </Formik>
-    </Container>
+    <>
+      <Container>
+        <Title>
+          monthly <br />
+          <span>event form</span>
+        </Title>
+        <Formik
+          initialValues={{
+            companyName: "",
+            month: "",
+            events: [
+              {
+                name: "",
+                date: "",
+                desc: "",
+              },
+            ],
+          }}
+          validate={(values) => {
+            console.log(values);
+          }}
+        >
+          {({ values, handleChange }) => (
+            <Form>
+              <UpperForm>
+                <Label>
+                  Company Name
+                  <Input name="companyName" onChange={handleChange} />
+                </Label>
+                <MonthInput name="month" />
+              </UpperForm>
+              <div>
+                <Title2>Event Programme</Title2>
+                <EventInput
+                  values={values}
+                  handleChange={handleChange}
+                  ref={eventHelper}
+                />
+                <BtnGroup>
+                  <BtnOutlined onClick={handleAddEvent}>
+                    <div>New Event</div>
+                    <FontAwesomeIcon icon={faPlus} size="sm" />
+                  </BtnOutlined>
+                  <BtnPrimary>Submit</BtnPrimary>
+                </BtnGroup>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      </Container>
+      <Toaster />
+    </>
   );
 };
 
