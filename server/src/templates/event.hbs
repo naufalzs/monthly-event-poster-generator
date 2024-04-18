@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<style type="text/css">
+  /* import font Archivo and Montserrat */
+  @import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+  :root {
+    --color-primary: #f37879;
+    --color-secondary: #91b4ec;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Montserrat", sans-serif;
+    color: #0a0a0a;
+  }
+
+  .container {
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .company {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .title {
+    margin: 20px 0;
+
+    font-family: "Archivo", sans-serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--color-primary);
+
+    line-height: 0.8;
+    text-transform: uppercase;
+
+    span {
+      font-size: 65px;
+      font-weight: 600;
+      color: var(--color-secondary);
+      letter-spacing: 0.15em;
+    }
+  }
+
+  .month {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .start-time {
+    margin-bottom: 24px;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+
+  .event-list {
+    min-width: 600px;
+    max-width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+
+  .event {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+
+    text-align: left;
+  }
+
+  .event-date {
+    flex: 0 0 auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 85px;
+    height: 85px;
+    background-color: var(--color-primary);
+
+    border-radius: 2px;
+
+    font-family: "Archivo", sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .event-name {
+    font-family: "Archivo", sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+
+    color: var(--color-secondary);
+  }
+
+  .event-desc {
+    width: 100%;
+
+    height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: 20px;
+    font-weight: 500;
+
+    color: var(--color-primary);
+  }
+
+  footer {
+    position: fixed;
+    bottom: 4px;
+    right: 4px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #a3a3a3;
+  }
+</style>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Template</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="company">{{companyName}} Present</h2>
+      <h1 class="title">Event <br /><span>Program</span></h1>
+      <p class="month">in {{month}}</p>
+      <p class="start-time">Start at 19.00pm</p>
+      <div class="event-list">
+        {{#each events as |event|}}
+        <div class="event">
+          <div class="event-date">{{event.date}}</div>
+          <div class="event-info">
+            <div class="event-name">{{event.name}}</div>
+            <div class="event-desc">
+              {{event.desc}}
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      <footer>made by Naufal Zufar</footer>
+    </div>
+  </body>
+</html>
