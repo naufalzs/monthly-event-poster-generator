@@ -182,9 +182,9 @@ const App = () => {
                   ref={eventHelper}
                 />
                 <Hint>
-                  All field need to be filled to submit{" "}
+                  All field need to be filled before submit{" "}
                   <FieldStatus>
-                    Field status <StatusBox $isValid={isValid} />
+                    Field completion status <StatusBox $isValid={isValid} />
                   </FieldStatus>
                 </Hint>
                 <BtnGroup>
