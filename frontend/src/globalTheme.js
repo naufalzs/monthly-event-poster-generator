@@ -63,8 +63,8 @@ const buttonStyle = css`
   transition: all 70ms ease-in;
 
   &:hover {
-    background-color: #f75f61;
-    border: 1px solid #f75f61;
+    background-color: var(--color-primary-hover);
+    border: 1px solid var(--color-primary-hover);
   }
 `;
 

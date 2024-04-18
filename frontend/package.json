@@ -21,7 +21,8 @@
     "react-datepicker": "^6.8.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

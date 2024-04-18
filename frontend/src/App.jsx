@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import EventInput from "./components/EventInput";
 import { useRef } from "react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import * as Yup from "yup";
 
 const Container = styled.div`
   max-width: 640px;
@@ -56,6 +57,32 @@ const BtnGroup = styled.div`
   gap: 16px;
 `;
 
+const Hint = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 12px;
+  font-weight: 400;
+  color: #a3a3a3;
+  margin-bottom: 16px;
+`;
+
+const FieldStatus = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+`;
+
+const StatusBox = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  transition: all 200ms ease-in;
+  background-color: ${(props) =>
+    props.$isValid ? "var(--color-green)" : "var(--color-red)"};
+`;
+
 const App = () => {
   const eventHelper = useRef(null);
 
@@ -67,6 +94,18 @@ const App = () => {
       desc: "",
     });
   };
+
+  const formValidation = Yup.object().shape({
+    companyName: Yup.string().required(),
+    month: Yup.string().required(),
+    events: Yup.array().of(
+      Yup.object().shape({
+        name: Yup.string().required(),
+        date: Yup.string().required(),
+        desc: Yup.string().required(),
+      })
+    ),
+  });
 
   return (
     <>
@@ -87,12 +126,23 @@ const App = () => {
               },
             ],
           }}
-          validate={(values) => {
+          validationSchema={formValidation}
+          validateOnMount={true}
+          onSubmit={(values) => {
             console.log(values);
           }}
         >
-          {({ values, handleChange }) => (
-            <Form>
+          {({ values, handleChange, handleSubmit, isValid }) => (
+            <Form
+              onSubmit={(e) => {
+                if (isValid) {
+                  handleSubmit(e);
+                } else {
+                  toast.error("Please fill all field before submit");
+                }
+                e.preventDefault();
+              }}
+            >
               <UpperForm>
                 <Label>
                   Company Name
@@ -107,12 +157,18 @@ const App = () => {
                   handleChange={handleChange}
                   ref={eventHelper}
                 />
+                <Hint>
+                  All field need to be filled to submit{" "}
+                  <FieldStatus>
+                    Field status <StatusBox $isValid={isValid} />
+                  </FieldStatus>
+                </Hint>
                 <BtnGroup>
                   <BtnOutlined onClick={handleAddEvent}>
                     <div>New Event</div>
                     <FontAwesomeIcon icon={faPlus} size="sm" />
                   </BtnOutlined>
-                  <BtnPrimary>Submit</BtnPrimary>
+                  <BtnPrimary type="submit">Submit</BtnPrimary>
                 </BtnGroup>
               </div>
             </Form>
