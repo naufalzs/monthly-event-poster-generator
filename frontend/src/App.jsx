@@ -109,8 +109,11 @@ const App = () => {
   });
 
   const fetchPdf = async (formData) => {
+    const sortedEvent = formData.events.slice().sort((a, b) => a.date - b.date);
+    const sortedFormData = { ...formData, events: sortedEvent };
+
     axios
-      .post("http://localhost:5001/convert-pdf", formData, {
+      .post("http://localhost:5001/convert-pdf", sortedFormData, {
         responseType: "blob",
       })
       .then((res) => {

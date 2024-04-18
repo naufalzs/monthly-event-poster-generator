@@ -48,7 +48,11 @@ const EventInput = forwardRef(({ values, handleChange }, ref) => {
             <UpperForm>
               <Label>
                 Event Name
-                <Input name={`events.${index}.name`} onChange={handleChange} />
+                <Input
+                  name={`events.${index}.name`}
+                  onChange={handleChange}
+                  maxLength={25}
+                />
               </Label>
               <Label>
                 Event Date
@@ -73,6 +77,7 @@ const EventInput = forwardRef(({ values, handleChange }, ref) => {
                   name={`events.${index}.desc`}
                   onChange={handleChange}
                   value={values.desc}
+                  maxLength={50}
                 />
               </Label>
             </LowerForm>
