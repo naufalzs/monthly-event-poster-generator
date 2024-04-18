@@ -170,7 +170,7 @@ const App = () => {
               <UpperForm>
                 <Label>
                   Company Name
-                  <Input name="companyName" onChange={handleChange} />
+                  <Input name="companyName" maxLength={30} onChange={handleChange} />
                 </Label>
                 <MonthInput name="month" />
               </UpperForm>

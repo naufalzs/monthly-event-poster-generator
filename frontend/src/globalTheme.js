@@ -33,6 +33,7 @@ export const Input = styled.input`
 
 export const Textarea = styled.textarea`
   ${inputStyle}
+  border-radius: 20px;
 `;
 
 export const Select = styled.select`

@@ -51,7 +51,7 @@ const EventInput = forwardRef(({ values, handleChange }, ref) => {
                 <Input
                   name={`events.${index}.name`}
                   onChange={handleChange}
-                  maxLength={25}
+                  maxLength={30}
                 />
               </Label>
               <Label>
