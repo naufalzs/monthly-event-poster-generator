@@ -8,6 +8,7 @@ import EventInput from "./components/EventInput";
 import { useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import * as Yup from "yup";
+import axios from "axios";
 
 const Container = styled.div`
   max-width: 640px;
@@ -107,6 +108,26 @@ const App = () => {
     ),
   });
 
+  const fetchPdf = async (formData) => {
+    axios
+      .post("http://localhost:5001/convert-pdf", formData, {
+        responseType: "blob",
+      })
+      .then((res) => {
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "company-event.pdf";
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something wrong, please try again");
+      });
+  };
+
   return (
     <>
       <Container>
@@ -129,7 +150,7 @@ const App = () => {
           validationSchema={formValidation}
           validateOnMount={true}
           onSubmit={(values) => {
-            console.log(values);
+            fetchPdf(values);
           }}
         >
           {({ values, handleChange, handleSubmit, isValid }) => (
