@@ -17,6 +17,7 @@ const inputStyle = css`
   border-radius: 30px;
   background-color: var(--color-gray);
 
+  font-family: inherit;
   font-size: 16px;
   font-weight: 500;
   padding: 8px 14px;
